@@ -42,7 +42,7 @@ public class ManagedObjectInfo
         return PostSignificanceType;
     }
 
-    void UpdateSignificance(List<Transform> ViewPoints, bool bSortSignificanceAscending)
+    public void UpdateSignificance(List<Transform> ViewPoints, bool bSortSignificanceAscending)
     {
 
     }
