@@ -108,21 +108,67 @@ public class SignificanceManager : MonoBehaviour
 
     public List<ManagedObjectInfo> GetManagedObjects(string Tag)
     {
+        if (managedObjectsByTag.ContainsKey(Tag))
+        {
+            return managedObjectsByTag[Tag];
+        }
         return null;
     }
 
-    public void GetManagedObjects(List<ManagedObjectInfo> OutManagedObjects, bool bInSignificanceOrder = false)
+    public ManagedObjectInfo GetManagedObject(UnityEngine.Object Object)
     {
+       if (managedObjects.ContainsKey(Object))
+        {
+            return managedObjects[Object];
+        }
+        return null;
+    }
 
+    public void GetManagedObjects(out List<ManagedObjectInfo> OutManagedObjects, bool bInSignificanceOrder = false)
+    {
+        OutManagedObjects = new List<ManagedObjectInfo>(managedObjects.Count);
+        foreach (List<ManagedObjectInfo> managedObjectInfos in managedObjectsByTag.Values)
+        {
+            OutManagedObjects.AddRange(managedObjectInfos);
+        }
+        if (bInSignificanceOrder)
+        {
+            OutManagedObjects.Sort(CompareBySignificance);
+        }
+    }
+
+    //Ascending
+    private int CompareBySignificance(ManagedObjectInfo x, ManagedObjectInfo y)
+    {
+        if (x.GetSignificance() > y.GetSignificance())
+        {
+            return -1;
+        }
+        else if (x.GetSignificance() < y.GetSignificance())
+        {
+            return 1;
+        }
+        return 0;
     }
 
     public float GetSignificance(UnityEngine.Object InObject)
     {
-        return 1.0f;
+        float Significance = 0f;
+        if (managedObjects.ContainsKey(InObject))
+        {
+            Significance = managedObjects[InObject].GetSignificance();
+        }
+        return Significance;
     }
 
-    public bool QuerySignificance(UnityEngine.Object InObject, float OutSignificance)
+    public bool QuerySignificance(UnityEngine.Object InObject, out float OutSignificance)
     {
+        if (managedObjects.ContainsKey(InObject))
+        {
+            OutSignificance = managedObjects[InObject].GetSignificance();
+            return true;
+        }
+        OutSignificance = 0f;
         return false;
     }
 
