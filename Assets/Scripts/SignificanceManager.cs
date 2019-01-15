@@ -24,8 +24,8 @@ public class SignificanceManager : MonoBehaviour
     public enum PostSignificanceType
     {
         None,
-        Concurrent,
-        Sequntial,
+        Concurrent,//同时
+        Sequntial,//顺序
     }
 
     public struct SequentialPostWorkPair
