@@ -10,8 +10,8 @@ public class SignificanceEntry : MonoBehaviour
     public SignificanceManager significanceManagerInstace;
     public GameObject significanceObjectContainer;
     public static string Tag = "group1";
-    public Transform Player;
-    public Camera MainCamera;
+    public Transform player;
+    public Camera mainCamera;
     public DebugDisplayInfo debugDisplayInfo;
     private List<Transform> transformArray;
 
@@ -29,7 +29,7 @@ public class SignificanceEntry : MonoBehaviour
             Transform significanceObject = significanceObjectContainer.transform.GetChild(i);
             significanceManagerInstace.RegisterObject(significanceObject, Tag, SignificanceFunction, SignificanceManager.PostSignificanceType.Sequntial, PostSignificanceFunction);
         }
-        transformArray.Add(Player);
+        transformArray.Add(player);
 
         debugDisplayInfo.ShouldDisplayDebug = true;
     }
@@ -37,7 +37,7 @@ public class SignificanceEntry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Player)
+        if (player)
         {
             significanceManagerInstace.UpdateSignificance(transformArray);
         }
@@ -55,7 +55,7 @@ public class SignificanceEntry : MonoBehaviour
             Collider collider = significanceActor.GetComponent<Collider>();
             if (collider)
             {
-                Plane[] planes = GeometryUtility.CalculateFrustumPlanes(MainCamera);
+                Plane[] planes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
                 if (GeometryUtility.TestPlanesAABB(planes, collider.bounds))
                 {
                     float significance = 1f - distance / significanceDistance;
