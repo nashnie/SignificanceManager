@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HUD : MonoBehaviour
+public class DebugHUD : MonoBehaviour
 {
     private TextMesh debugText;
     // Start is called before the first frame update

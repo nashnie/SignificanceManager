@@ -81,7 +81,7 @@ public class SignificanceEntry : MonoBehaviour
 
 #if UNITY_EDITOR
         Transform significanceActor = (Transform)objectInfo.GetObject();
-        HUD textMesh = significanceActor.GetComponentInChildren<HUD>();
+        DebugHUD textMesh = significanceActor.GetComponentInChildren<DebugHUD>();
         textMesh.ShowDebugView(significance, debugDisplayInfo.ShouldDisplayDebug);
 #endif
     }
