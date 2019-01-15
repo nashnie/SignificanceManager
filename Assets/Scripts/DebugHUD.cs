@@ -5,7 +5,7 @@ using UnityEngine;
 public class DebugHUD : MonoBehaviour
 {
     private TextMesh debugText;
-    // Start is called before the first frame update
+
     void Start()
     {
         debugText = gameObject.GetComponentInChildren<TextMesh>();
