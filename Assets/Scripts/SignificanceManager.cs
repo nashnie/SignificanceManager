@@ -15,11 +15,11 @@ public class SignificanceManager : MonoBehaviour
 
     protected bool bSortSignificanceAscending;
     private int managedObjectsWithSequentialPostWork;
-    List<Transform> Viewpoints;
+    List<Transform> viewpoints;
     Dictionary<string, List<ManagedObjectInfo>> managedObjectsByTag;
     Dictionary<UnityEngine.Object, ManagedObjectInfo> managedObjects;
-    List<ManagedObjectInfo> ObjArray;
-    List<SequentialPostWorkPair> ObjWithSequentialPostWork;
+    List<ManagedObjectInfo> objArray;
+    List<SequentialPostWorkPair> objWithSequentialPostWork;
 
     static int SignificanceManagerObjectsToShow = 15;
 
@@ -32,57 +32,64 @@ public class SignificanceManager : MonoBehaviour
 
     public struct SequentialPostWorkPair
     {
-        public ManagedObjectInfo ObjectInfo;
-        public float OldSignificance;
+        public ManagedObjectInfo objectInfo;
+        public float oldSignificance;
     }
 
     private void Awake()
     {
         bSortSignificanceAscending = false;
-        Viewpoints = new List<Transform>();
-        ObjArray = new List<ManagedObjectInfo>();
+        viewpoints = new List<Transform>();
+        objArray = new List<ManagedObjectInfo>();
         managedObjectsByTag = new Dictionary<string, List<ManagedObjectInfo>>();
         managedObjects = new Dictionary<UnityEngine.Object, ManagedObjectInfo>();
-        ObjWithSequentialPostWork = new List<SequentialPostWorkPair>();
+        objWithSequentialPostWork = new List<SequentialPostWorkPair>();
     }
 
     private void OnDestroy()
     {
+        bSortSignificanceAscending = false;
+        viewpoints = null;
+        objArray = null;
+        managedObjectsByTag = null;
+        managedObjects = null;
+        managedObjects = null;
+        objWithSequentialPostWork = null;
     }
 
-    public void UpdateSignificance(List<Transform> InViewpoints)
+    public void UpdateSignificance(List<Transform> inViewpoints)
     {
-        Viewpoints.Clear();
-        Viewpoints.AddRange(InViewpoints);
+        viewpoints.Clear();
+        viewpoints.AddRange(inViewpoints);
 
-        ObjArray.Capacity = managedObjects.Count;
-        ObjWithSequentialPostWork.Capacity = managedObjectsWithSequentialPostWork;
+        objArray.Capacity = managedObjects.Count;
+        objWithSequentialPostWork.Capacity = managedObjectsWithSequentialPostWork;
         foreach (ManagedObjectInfo ObjectInfo in managedObjects.Values)
         {
-            ObjArray.Add(ObjectInfo);
+            objArray.Add(ObjectInfo);
             if (ObjectInfo.GetPostSignificanceType() == PostSignificanceType.Sequntial)
             {
                 SequentialPostWorkPair sequentialPostWorkPair = new SequentialPostWorkPair();
-                sequentialPostWorkPair.ObjectInfo = ObjectInfo;
-                sequentialPostWorkPair.OldSignificance = ObjectInfo.GetSignificance();
-                ObjWithSequentialPostWork.Add(sequentialPostWorkPair);
+                sequentialPostWorkPair.objectInfo = ObjectInfo;
+                sequentialPostWorkPair.oldSignificance = ObjectInfo.GetSignificance();
+                objWithSequentialPostWork.Add(sequentialPostWorkPair);
             }
         }
 
-        for (int i = 0; i < ObjArray.Count; i++)
+        for (int i = 0; i < objArray.Count; i++)
         {
-            ManagedObjectInfo ObjectInfo = ObjArray[i];
-            ObjectInfo.UpdateSignificance(Viewpoints, bSortSignificanceAscending);
+            ManagedObjectInfo ObjectInfo = objArray[i];
+            ObjectInfo.UpdateSignificance(viewpoints, bSortSignificanceAscending);
         }
 
-        foreach (SequentialPostWorkPair sequentialPostWorkPair in ObjWithSequentialPostWork)
+        foreach (SequentialPostWorkPair sequentialPostWorkPair in objWithSequentialPostWork)
         {
-            ManagedObjectInfo objectInfo = sequentialPostWorkPair.ObjectInfo;
-            objectInfo.GetPostSignificanceFunction()(objectInfo, sequentialPostWorkPair.OldSignificance, objectInfo.GetSignificance(), false);
+            ManagedObjectInfo objectInfo = sequentialPostWorkPair.objectInfo;
+            objectInfo.GetPostSignificanceFunction()(objectInfo, sequentialPostWorkPair.oldSignificance, objectInfo.GetSignificance(), false);
         }
 
-        ObjArray.Clear();
-        ObjWithSequentialPostWork.Clear();
+        objArray.Clear();
+        objWithSequentialPostWork.Clear();
 
         foreach (List<ManagedObjectInfo> managedObjectInfos in managedObjectsByTag.Values)
         {
@@ -90,14 +97,15 @@ public class SignificanceManager : MonoBehaviour
         }
     }
 
-    public void RegisterObject(UnityEngine.Object InObject, string Tag, FSignificanceFunction SignificanceFunction, PostSignificanceType PostSignificanceType = PostSignificanceType.None, FPostSignificanceFunction PostSignificanceFunction = null)
+    public void RegisterObject(UnityEngine.Object inObject, string tag, FManagedObjectSignificanceFunction managedObjectSignificanceFunction, PostSignificanceType postSignificanceType = PostSignificanceType.None, FManagedObjectPostSignificanceFunction managedObjectPostSignificanceFunction = null)
     {
-
-    }
-
-    public void RegisterObject(UnityEngine.Object InObject, string Tag, FManagedObjectSignificanceFunction ManagedObjectSignificanceFunction, PostSignificanceType PostSignificanceType = PostSignificanceType.None, FManagedObjectPostSignificanceFunction ManagedObjectPostSignificanceFunction = null)
-    {
-        ManagedObjectInfo managedObjectInfo = new ManagedObjectInfo(InObject, Tag, 1.0f, PostSignificanceType, ManagedObjectSignificanceFunction, ManagedObjectPostSignificanceFunction);
+        ManagedObjectInfo managedObjectInfo = new ManagedObjectInfo(
+                                                                    inObject, 
+                                                                    tag, 
+                                                                    1.0f, 
+                                                                    postSignificanceType, 
+                                                                    managedObjectSignificanceFunction, 
+                                                                    managedObjectPostSignificanceFunction);
         RegisterManagedObject(managedObjectInfo);
     }
 
@@ -132,11 +140,11 @@ public class SignificanceManager : MonoBehaviour
         }
     }
 
-    public void UnregisterAll(string Tag)
+    public void UnregisterAll(string tag)
     {
-        if (managedObjectsByTag.ContainsKey(Tag))
+        if (managedObjectsByTag.ContainsKey(tag))
         {
-            List<ManagedObjectInfo> ObjectsWithTag = managedObjectsByTag[Tag];
+            List<ManagedObjectInfo> ObjectsWithTag = managedObjectsByTag[tag];
             foreach (ManagedObjectInfo ManagedObj in ObjectsWithTag)
             {
                 managedObjects.Remove(ManagedObj.GetObject());
@@ -145,38 +153,38 @@ public class SignificanceManager : MonoBehaviour
                     ManagedObj.GetPostSignificanceFunction()(ManagedObj, ManagedObj.GetSignificance(), 1.0f, true);
                 }
             }
-            managedObjectsByTag.Remove(Tag);
+            managedObjectsByTag.Remove(tag);
         }
     }
 
-    public List<ManagedObjectInfo> GetManagedObjects(string Tag)
+    public List<ManagedObjectInfo> GetManagedObjects(string tag)
     {
-        if (managedObjectsByTag.ContainsKey(Tag))
+        if (managedObjectsByTag.ContainsKey(tag))
         {
-            return managedObjectsByTag[Tag];
+            return managedObjectsByTag[tag];
         }
         return null;
     }
 
-    public ManagedObjectInfo GetManagedObject(UnityEngine.Object Object)
+    public ManagedObjectInfo GetManagedObject(UnityEngine.Object inObject)
     {
-       if (managedObjects.ContainsKey(Object))
+       if (managedObjects.ContainsKey(inObject))
         {
-            return managedObjects[Object];
+            return managedObjects[inObject];
         }
         return null;
     }
 
-    public void GetManagedObjects(out List<ManagedObjectInfo> OutManagedObjects, bool bInSignificanceOrder = false)
+    public void GetManagedObjects(out List<ManagedObjectInfo> outManagedObjects, bool bInSignificanceOrder = false)
     {
-        OutManagedObjects = new List<ManagedObjectInfo>(managedObjects.Count);
+        outManagedObjects = new List<ManagedObjectInfo>(managedObjects.Count);
         foreach (List<ManagedObjectInfo> managedObjectInfos in managedObjectsByTag.Values)
         {
-            OutManagedObjects.AddRange(managedObjectInfos);
+            outManagedObjects.AddRange(managedObjectInfos);
         }
         if (bInSignificanceOrder)
         {
-            OutManagedObjects.Sort(CompareBySignificance);
+            outManagedObjects.Sort(CompareBySignificance);
         }
     }
 
@@ -194,30 +202,30 @@ public class SignificanceManager : MonoBehaviour
         return 0;
     }
 
-    public float GetSignificance(UnityEngine.Object InObject)
+    public float GetSignificance(UnityEngine.Object inObject)
     {
-        float Significance = 0f;
-        if (managedObjects.ContainsKey(InObject))
+        float significance = 0f;
+        if (managedObjects.ContainsKey(inObject))
         {
-            Significance = managedObjects[InObject].GetSignificance();
+            significance = managedObjects[inObject].GetSignificance();
         }
-        return Significance;
+        return significance;
     }
 
-    public bool QuerySignificance(UnityEngine.Object InObject, out float OutSignificance)
+    public bool QuerySignificance(UnityEngine.Object inObject, out float outSignificance)
     {
-        if (managedObjects.ContainsKey(InObject))
+        if (managedObjects.ContainsKey(inObject))
         {
-            OutSignificance = managedObjects[InObject].GetSignificance();
+            outSignificance = managedObjects[inObject].GetSignificance();
             return true;
         }
-        OutSignificance = 0f;
+        outSignificance = 0f;
         return false;
     }
 
     public List<Transform> GetViewpoints()
     {
-        return null;
+        return viewpoints;
     }
 
     protected void RegisterManagedObject(ManagedObjectInfo objectInfo)
@@ -227,9 +235,9 @@ public class SignificanceManager : MonoBehaviour
         {
             ++managedObjectsWithSequentialPostWork;
         }
-        if (Viewpoints.Count > 0)
+        if (viewpoints.Count > 0)
         {
-            objectInfo.UpdateSignificance(Viewpoints, bSortSignificanceAscending);
+            objectInfo.UpdateSignificance(viewpoints, bSortSignificanceAscending);
 
             if (objectInfo.GetPostSignificanceType() == PostSignificanceType.Sequntial)
             {
