@@ -44,6 +44,42 @@ public class ManagedObjectInfo
 
     public void UpdateSignificance(List<Transform> ViewPoints, bool bSortSignificanceAscending)
     {
+        float OldSignificance = Significance;
+        if (ViewPoints.Count > 0)
+        {
+            if (bSortSignificanceAscending)
+            {
+                Significance = float.MaxValue;
+                foreach (Transform ViewPoint in ViewPoints)
+                {
+                    float ViewPointSignificance = SignificanceFunction(this, ViewPoint);
+                    if (ViewPointSignificance < Significance)
+                    {
+                        Significance = ViewPointSignificance;
+                    }
+                }
+            }
+            else
+            {
+                Significance = float.MinValue;
+                foreach (Transform ViewPoint in ViewPoints)
+                {
+                    float ViewPointSignificance = SignificanceFunction(this, ViewPoint);
+                    if (ViewPointSignificance > Significance)
+                    {
+                        Significance = ViewPointSignificance;
+                    }
+                }
+            }
+        }
+        else
+        {
+            Significance = 0f;
+        }
 
+        if (PostSignificanceType == SignificanceManager.PostSignificanceType.Concurrent)
+        {
+            PostSignificanceFunction(this, OldSignificance, Significance, false);
+        }
     }
 }

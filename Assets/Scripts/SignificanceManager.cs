@@ -5,10 +5,10 @@ using System;
 
 public class SignificanceManager : MonoBehaviour
 {
-    public delegate void FSignificanceFunction(UnityEngine.Object inObject, Transform transform);
+    public delegate float FSignificanceFunction(UnityEngine.Object inObject, Transform transform);
     public delegate void FPostSignificanceFunction(UnityEngine.Object inObject, float param1, float param2, bool param3);
 
-    public delegate void FManagedObjectSignificanceFunction(ManagedObjectInfo ManagedObjectInfo, Transform transform);
+    public delegate float FManagedObjectSignificanceFunction(ManagedObjectInfo ManagedObjectInfo, Transform transform);
     public delegate void FManagedObjectPostSignificanceFunction(ManagedObjectInfo ManagedObjectInfo, float param1, float param2, bool param3);
 
     protected bool bSortSignificanceAscending;
@@ -19,6 +19,8 @@ public class SignificanceManager : MonoBehaviour
     List<ManagedObjectInfo> ObjArray;
     List<SequentialPostWorkPair> ObjWithSequentialPostWork;
 
+    static int SignificanceManagerObjectsToShow = 15;
+
     public enum PostSignificanceType
     {
         None,
@@ -26,10 +28,10 @@ public class SignificanceManager : MonoBehaviour
         Sequntial,
     }
 
-    struct SequentialPostWorkPair
+    public struct SequentialPostWorkPair
     {
-        ManagedObjectInfo ObjectInfo;
-        float OldSignificance;
+        public ManagedObjectInfo ObjectInfo;
+        public float OldSignificance;
     }
 
     // Start is called before the first frame update
@@ -46,6 +48,46 @@ public class SignificanceManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    void Update(List<Transform> InViewpoints)
+    {
+        Viewpoints.Clear();
+        Viewpoints.AddRange(InViewpoints);
+
+        ObjArray.Capacity = managedObjects.Count;
+        ObjWithSequentialPostWork.Capacity = managedObjectsWithSequentialPostWork;
+        foreach (ManagedObjectInfo ObjectInfo in managedObjects.Values)
+        {
+            ObjArray.Add(ObjectInfo);
+            if (ObjectInfo.GetPostSignificanceType() == PostSignificanceType.Sequntial)
+            {
+                SequentialPostWorkPair sequentialPostWorkPair = new SequentialPostWorkPair();
+                sequentialPostWorkPair.ObjectInfo = ObjectInfo;
+                sequentialPostWorkPair.OldSignificance = ObjectInfo.GetSignificance();
+                ObjWithSequentialPostWork.Add(sequentialPostWorkPair);
+            }
+        }
+
+        for (int i = 0; i < ObjArray.Count; i++)
+        {
+            ManagedObjectInfo ObjectInfo = ObjArray[i];
+            ObjectInfo.UpdateSignificance(Viewpoints, bSortSignificanceAscending);
+        }
+
+        foreach (SequentialPostWorkPair sequentialPostWorkPair in ObjWithSequentialPostWork)
+        {
+            ManagedObjectInfo objectInfo = sequentialPostWorkPair.ObjectInfo;
+            objectInfo.GetPostSignificanceFunction()(objectInfo, sequentialPostWorkPair.OldSignificance, objectInfo.GetSignificance(), false);
+        }
+
+        ObjArray.Clear();
+        ObjWithSequentialPostWork.Clear();
+
+        foreach (List<ManagedObjectInfo> managedObjectInfos in managedObjectsByTag.Values)
+        {
+            managedObjectInfos.Sort(CompareBySignificance);
+        }
     }
 
     public void RegisterObject(UnityEngine.Object InObject, string Tag, FSignificanceFunction SignificanceFunction, PostSignificanceType PostSignificanceType = PostSignificanceType.None, FPostSignificanceFunction PostSignificanceFunction = null)
