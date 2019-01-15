@@ -51,6 +51,7 @@ public class SignificanceEntry : MonoBehaviour
 
         //distance、visibility
         //TODO screen size...
+        //TODO occlusionCulling 
         if (distance < significanceDistance)
         {     
             Collider collider = significanceActor.GetComponent<Collider>();
@@ -62,10 +63,6 @@ public class SignificanceEntry : MonoBehaviour
                     float significance = 1f - distance / significanceDistance;
                     return significance;
                 }
-                else
-                {
-                    return 0f;
-                }
             }
         }
         return 0f;
@@ -75,9 +72,13 @@ public class SignificanceEntry : MonoBehaviour
     {
         if (significance > 0f)
         {
+            //提高 AI tick 频率，设置粒子发射器等等
+            //设置 lod level
         }
         else
         {
+            //关闭 AI tick，关闭粒子等
+            //关闭 lod
         }
 
 #if UNITY_EDITOR
