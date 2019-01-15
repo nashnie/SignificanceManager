@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+/// <summary>
+/// Nash
+/// </summary>
 public class SignificanceManager : MonoBehaviour
 {
     public delegate float FSignificanceFunction(UnityEngine.Object inObject, Transform transform);
@@ -24,7 +26,7 @@ public class SignificanceManager : MonoBehaviour
     public enum PostSignificanceType
     {
         None,
-        Concurrent,//同时
+        Concurrent,//同时 TODO thread
         Sequntial,//顺序
     }
 

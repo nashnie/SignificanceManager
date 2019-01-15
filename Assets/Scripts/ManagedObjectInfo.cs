@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Nash
+/// </summary>
 public class ManagedObjectInfo
 {
     private UnityEngine.Object InObject;

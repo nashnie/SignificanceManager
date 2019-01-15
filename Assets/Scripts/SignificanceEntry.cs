@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Nash 
+/// MainEntry
+/// </summary>
 public class SignificanceEntry : MonoBehaviour
 {
     public SignificanceManager significanceManagerInstace;
     public GameObject significanceObjectContainer;
     public static string Tag = "group1";
     public Transform Player;
+    public Camera MainCamera;
     public DebugDisplayInfo debugDisplayInfo;
     private List<Transform> transformArray;
 
@@ -48,10 +52,24 @@ public class SignificanceEntry : MonoBehaviour
         Transform significanceActor = (Transform)objectInfo.GetObject();
         float distance = Vector3.Distance(transform.position, significanceActor.position);
 
+        //distance、visibility
+        //TODO screen size...
         if (distance < significanceDistance)
-        {
-            float Significance = 1f - distance / significanceDistance;
-            return Significance;
+        {     
+            Collider collider = significanceActor.GetComponent<Collider>();
+            if (collider)
+            {
+                Plane[] planes = GeometryUtility.CalculateFrustumPlanes(MainCamera);
+                if (GeometryUtility.TestPlanesAABB(planes, collider.bounds))
+                {
+                    float significance = 1f - distance / significanceDistance;
+                    return significance;
+                }
+                else
+                {
+                    return 0f;
+                }
+            }
         }
         return 0f;
     }
