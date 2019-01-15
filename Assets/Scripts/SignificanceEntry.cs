@@ -9,7 +9,7 @@ public class SignificanceEntry : MonoBehaviour
 {
     public SignificanceManager significanceManagerInstace;
     public GameObject significanceObjectContainer;
-    public static string Tag = "group1";
+    public static string Tag = "";
     public Transform player;
     public Camera mainCamera;
     public DebugDisplayInfo debugDisplayInfo;
@@ -20,6 +20,7 @@ public class SignificanceEntry : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Tag = significanceObjectContainer.tag;
         debugDisplayInfo = new DebugDisplayInfo();
         transformArray = new List<Transform>();
         significanceManagerInstace = significanceObjectContainer.AddComponent<SignificanceManager>();
