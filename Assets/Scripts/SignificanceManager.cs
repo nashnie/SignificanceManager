@@ -6,10 +6,10 @@ using System;
 public class SignificanceManager : MonoBehaviour
 {
     public delegate float FSignificanceFunction(UnityEngine.Object inObject, Transform transform);
-    public delegate void FPostSignificanceFunction(UnityEngine.Object inObject, float param1, float param2, bool param3);
+    public delegate void FPostSignificanceFunction(UnityEngine.Object inObject, float oldSignificance, float significance, bool bUnregistered);
 
     public delegate float FManagedObjectSignificanceFunction(ManagedObjectInfo ManagedObjectInfo, Transform transform);
-    public delegate void FManagedObjectPostSignificanceFunction(ManagedObjectInfo ManagedObjectInfo, float param1, float param2, bool param3);
+    public delegate void FManagedObjectPostSignificanceFunction(ManagedObjectInfo ManagedObjectInfo, float oldSignificance, float significance, bool bUnregistered);
 
     protected bool bSortSignificanceAscending;
     private int managedObjectsWithSequentialPostWork;
@@ -34,23 +34,21 @@ public class SignificanceManager : MonoBehaviour
         public float OldSignificance;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         bSortSignificanceAscending = false;
+        Viewpoints = new List<Transform>();
+        ObjArray = new List<ManagedObjectInfo>();
+        managedObjectsByTag = new Dictionary<string, List<ManagedObjectInfo>>();
+        managedObjects = new Dictionary<UnityEngine.Object, ManagedObjectInfo>();
+        ObjWithSequentialPostWork = new List<SequentialPostWorkPair>();
     }
 
     private void OnDestroy()
     {
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void Update(List<Transform> InViewpoints)
+    public void UpdateSignificance(List<Transform> InViewpoints)
     {
         Viewpoints.Clear();
         Viewpoints.AddRange(InViewpoints);
@@ -97,7 +95,8 @@ public class SignificanceManager : MonoBehaviour
 
     public void RegisterObject(UnityEngine.Object InObject, string Tag, FManagedObjectSignificanceFunction ManagedObjectSignificanceFunction, PostSignificanceType PostSignificanceType = PostSignificanceType.None, FManagedObjectPostSignificanceFunction ManagedObjectPostSignificanceFunction = null)
     {
-
+        ManagedObjectInfo managedObjectInfo = new ManagedObjectInfo(InObject, Tag, 1.0f, PostSignificanceType, ManagedObjectSignificanceFunction, ManagedObjectPostSignificanceFunction);
+        RegisterManagedObject(managedObjectInfo);
     }
 
     public void UnregisterObject(UnityEngine.Object InObject)
@@ -274,10 +273,6 @@ public class SignificanceManager : MonoBehaviour
         {
             managedObjectInfos.Add(objectInfo);
         }
-    }
-
-    private void OnShowDebugInfo(HUD hud, DebugDisplayInfo displayInfo, float yl, float ypos)
-    {
     }
 
     private List<ManagedObjectInfo> FindOrAdd(string Tag, Dictionary<string, List<ManagedObjectInfo>> ManagedObjectsByTag)

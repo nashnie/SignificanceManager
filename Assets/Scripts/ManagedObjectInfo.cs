@@ -12,6 +12,19 @@ public class ManagedObjectInfo
     private SignificanceManager.FManagedObjectSignificanceFunction SignificanceFunction;
     private SignificanceManager.FManagedObjectPostSignificanceFunction PostSignificanceFunction;
 
+    public ManagedObjectInfo(UnityEngine.Object InObject, string InTag, float Significance, 
+        SignificanceManager.PostSignificanceType PostSignificanceType, 
+        SignificanceManager.FManagedObjectSignificanceFunction SignificanceFunction, 
+        SignificanceManager.FManagedObjectPostSignificanceFunction PostSignificanceFunction)
+    {
+        this.InObject = InObject;
+        this.InTag = InTag;
+        this.Significance = Significance;
+        this.SignificanceFunction = SignificanceFunction;
+        this.PostSignificanceType = PostSignificanceType;
+        this.PostSignificanceFunction = PostSignificanceFunction;
+    }
+
     public UnityEngine.Object GetObject()
     {
         return InObject;
