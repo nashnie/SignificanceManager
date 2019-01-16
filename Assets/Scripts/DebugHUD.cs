@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Nash
+/// </summary>
+
 public class DebugHUD : MonoBehaviour
 {
     private TextMesh debugText;

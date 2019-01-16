@@ -2,6 +2,9 @@
 using UnityEngine;
 using System.Collections;
  
+/// <summary>
+/// Nash
+/// </summary>
 public class TestObjScreenSize : MonoBehaviour
 {
     public Transform target;

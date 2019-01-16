@@ -5,6 +5,7 @@ using UnityEngine;
 /// Nash 
 /// MainEntry
 /// </summary>
+
 public class SignificanceEntry : MonoBehaviour
 {
     public SignificanceManager significanceManagerInstace;

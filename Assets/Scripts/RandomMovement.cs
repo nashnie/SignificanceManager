@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Nash
+/// </summary>
 public class RandomMovement : MonoBehaviour
 {
     public float moveSpeed;
@@ -10,8 +13,7 @@ public class RandomMovement : MonoBehaviour
     private int maxFrame = 300;
     // Start is called before the first frame update
     void Start()
-    {
-        
+    { 
     }
 
     // Update is called once per frame
