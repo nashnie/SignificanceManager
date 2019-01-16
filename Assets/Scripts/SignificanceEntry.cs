@@ -13,9 +13,11 @@ public class SignificanceEntry : MonoBehaviour
     public Transform player;
     public Camera mainCamera;
     public DebugDisplayInfo debugDisplayInfo;
-    private List<Transform> transformArray;
 
-    private static float significanceDistance = 30f;
+    public float significanceDistance = 50f;
+    public float significancePixelSize = 100f;
+
+    private List<Transform> transformArray;
 
     // Start is called before the first frame update
     void Start()
@@ -49,23 +51,30 @@ public class SignificanceEntry : MonoBehaviour
         Transform significanceActor = (Transform)objectInfo.GetObject();
         float distance = Vector3.Distance(transform.position, significanceActor.position);
 
-        //distance、visibility
-        //TODO screen size...
+        //distance、visibility、screen size
         //TODO occlusionCulling 
+
         if (distance < significanceDistance)
-        {     
+        {
             Collider collider = significanceActor.GetComponent<Collider>();
             if (collider)
             {
                 Plane[] planes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
                 if (GeometryUtility.TestPlanesAABB(planes, collider.bounds))
                 {
-                    float significance = 1f - distance / significanceDistance;
-                    return significance;
+                    float diameter = collider.bounds.extents.magnitude;
+                    float distanceToCamera = Vector3.Distance(mainCamera.transform.position, significanceActor.position);
+                    float angularSize = (diameter / distanceToCamera) * Mathf.Rad2Deg;
+                    float pixelSize = ((angularSize * Screen.height) / mainCamera.fieldOfView);
+                    float distanceSignificance = 1f - distance / significanceDistance;
+                    pixelSize = pixelSize > significancePixelSize ? significancePixelSize : pixelSize;
+                    float pixelSignificance = (1 - distanceSignificance) * pixelSize / significancePixelSize;//能量守恒
+
+                    return distanceSignificance + pixelSignificance;
                 }
             }
         }
-        return 0f;
+        return 0.0f;
     }
 
     public void PostSignificanceFunction(ManagedObjectInfo objectInfo, float oldSignificance, float significance, bool bUnregistered)

@@ -34,5 +34,7 @@ public class DebugHUD : MonoBehaviour
                 }
             }
         }
+
+        debugText.text = significance.ToString();
     }
 }
