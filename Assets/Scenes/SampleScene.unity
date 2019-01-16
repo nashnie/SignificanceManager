@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 118517831}
   - component: {fileID: 118517830}
   - component: {fileID: 118517829}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 353046189}
   - component: {fileID: 353046188}
   - component: {fileID: 353046187}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 363941102}
   - component: {fileID: 363941101}
   - component: {fileID: 363941103}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,10 +468,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 363941099}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 960c221274380d44e90d6dee19216f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
 --- !u!1 &369443936
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +483,7 @@ GameObject:
   - component: {fileID: 369443940}
   - component: {fileID: 369443939}
   - component: {fileID: 369443938}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +576,7 @@ GameObject:
   - component: {fileID: 386828138}
   - component: {fileID: 386828137}
   - component: {fileID: 386828136}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -752,7 +751,7 @@ GameObject:
   - component: {fileID: 541490106}
   - component: {fileID: 541490105}
   - component: {fileID: 541490104}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +844,7 @@ GameObject:
   - component: {fileID: 815047816}
   - component: {fileID: 815047815}
   - component: {fileID: 815047817}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -934,10 +933,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 815047813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 960c221274380d44e90d6dee19216f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
 --- !u!1 &887453728
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +948,7 @@ GameObject:
   - component: {fileID: 887453732}
   - component: {fileID: 887453731}
   - component: {fileID: 887453730}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,7 +1041,7 @@ GameObject:
   - component: {fileID: 935532499}
   - component: {fileID: 935532498}
   - component: {fileID: 935532500}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1132,10 +1130,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 935532496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 960c221274380d44e90d6dee19216f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
 --- !u!1 &996331618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,7 +1143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 996331620}
   - component: {fileID: 996331619}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SignificanceObjectContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1205,7 +1202,7 @@ GameObject:
   - component: {fileID: 1005194270}
   - component: {fileID: 1005194269}
   - component: {fileID: 1005194271}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1294,10 +1291,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1005194267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 960c221274380d44e90d6dee19216f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
 --- !u!1 &1065694696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,7 +1306,7 @@ GameObject:
   - component: {fileID: 1065694699}
   - component: {fileID: 1065694698}
   - component: {fileID: 1065694700}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1399,10 +1395,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1065694696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 960c221274380d44e90d6dee19216f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
 --- !u!1 &1118412380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,7 +1504,7 @@ GameObject:
   - component: {fileID: 1122354517}
   - component: {fileID: 1122354516}
   - component: {fileID: 1122354515}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1696,6 +1691,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
   debugText: {fileID: 0}
 --- !u!1 &1149241734
 GameObject:
@@ -1709,7 +1716,7 @@ GameObject:
   - component: {fileID: 1149241737}
   - component: {fileID: 1149241736}
   - component: {fileID: 1149241738}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1798,10 +1805,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1149241734}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 960c221274380d44e90d6dee19216f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
 --- !u!1 &1153511738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,7 +1820,7 @@ GameObject:
   - component: {fileID: 1153511742}
   - component: {fileID: 1153511741}
   - component: {fileID: 1153511740}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1907,7 +1913,7 @@ GameObject:
   - component: {fileID: 1155526896}
   - component: {fileID: 1155526895}
   - component: {fileID: 1155526897}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1996,10 +2002,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1155526893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 960c221274380d44e90d6dee19216f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
 --- !u!1 &1573736117
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,7 +2017,7 @@ GameObject:
   - component: {fileID: 1573736121}
   - component: {fileID: 1573736120}
   - component: {fileID: 1573736119}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2105,7 +2110,7 @@ GameObject:
   - component: {fileID: 1602803440}
   - component: {fileID: 1602803439}
   - component: {fileID: 1602803438}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2198,7 +2203,7 @@ GameObject:
   - component: {fileID: 1620645537}
   - component: {fileID: 1620645536}
   - component: {fileID: 1620645538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2287,10 +2292,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1620645534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 960c221274380d44e90d6dee19216f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
 --- !u!1 &1654892044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2395,7 +2399,7 @@ GameObject:
   - component: {fileID: 1752038278}
   - component: {fileID: 1752038277}
   - component: {fileID: 1752038279}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2484,10 +2488,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1752038275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 960c221274380d44e90d6dee19216f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
 --- !u!1 &2007483804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2500,7 +2503,7 @@ GameObject:
   - component: {fileID: 2007483807}
   - component: {fileID: 2007483806}
   - component: {fileID: 2007483808}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2589,7 +2592,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2007483804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6378f66b49e02c343957e4188b5e0c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 960c221274380d44e90d6dee19216f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
