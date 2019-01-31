@@ -3,4 +3,4 @@ SignificanceManager is a simple framework,like **unreal engine** SignificanceMan
 You can used to manage different objects' lod, AI update frequency, whether to spawn effects etc.<br>
 You have the flexibility to customize your own significance management algorithms and significance post processing.<br>
 
-![significance.h](/images/significance.png)<br>
+![significance.h](/Images/significance.png)<br>
